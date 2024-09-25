@@ -135,7 +135,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
                 fontSize: 20,
               ),
               decoration: BoxDecoration(
-                color: Colors.indigo, // Change header color
+                color: Colors.pink, // Change header color
               ),
             ),
             calendarStyle: CalendarStyle(

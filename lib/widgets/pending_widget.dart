@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +25,15 @@ class _PendingWidgetState extends State<PendingWidget> {
     uid = FirebaseAuth.instance.currentUser!.uid;
   }
 
+  // Danh sách màu cố định
+  final List<Color> _colors = [
+    Color(0xffC96868), // Màu xanh
+    Color(0xff48CFCB), // Màu vàng
+    Color(0xff78B7D0), // Màu đỏ
+    Color(0xffA5B68D), // Màu xanh lá
+    Colors.orange, // Màu cam
+  ];
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<Todo>>(
@@ -37,16 +48,24 @@ class _PendingWidgetState extends State<PendingWidget> {
             itemBuilder: (context, index) {
               Todo todo = todos[index];
 
+              // Chọn màu dựa trên chỉ mục của item
+              Color tileColor = _colors[
+                  index % _colors.length]; // Áp dụng màu tuần tự theo thứ tự
+
               return Container(
                 margin: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: tileColor, // Áp dụng màu theo chỉ mục
                   borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
+                    color: Colors.black,
+                    width: 3.0,
+                  ),
                 ),
                 child: Slidable(
                   key: ValueKey(todo.id),
                   endActionPane: ActionPane(
-                    motion: DrawerMotion(),
+                    motion: const DrawerMotion(),
                     children: [
                       SlidableAction(
                         backgroundColor: Colors.green,
@@ -60,7 +79,7 @@ class _PendingWidgetState extends State<PendingWidget> {
                     ],
                   ),
                   startActionPane: ActionPane(
-                    motion: DrawerMotion(),
+                    motion: const DrawerMotion(),
                     children: [
                       SlidableAction(
                         backgroundColor: Colors.amber,
@@ -83,30 +102,31 @@ class _PendingWidgetState extends State<PendingWidget> {
                     ],
                   ),
                   child: ListTile(
-                      title: Text(
-                        todo.title,
-                        style: const TextStyle(
-                          fontFamily: 'Jaldi',
-                          fontSize: 17,
-                          fontWeight: FontWeight.w500,
-                        ),
+                    title: Text(
+                      todo.title,
+                      style: const TextStyle(
+                        fontFamily: 'Jaldi',
+                        fontSize: 17,
+                        fontWeight: FontWeight.w500,
                       ),
-                      subtitle: Text(
-                        todo.description,
-                        style: const TextStyle(
-                          fontFamily: 'Jaldi',
-                          fontWeight: FontWeight.w500,
-                        ),
+                    ),
+                    subtitle: Text(
+                      todo.description,
+                      style: const TextStyle(
+                        fontFamily: 'Jaldi',
+                        fontWeight: FontWeight.w500,
                       ),
-                      trailing: Text(
-                        'Hạn chót: ${DateFormat('yyyy-MM-dd | HH:mm:ss').format(todo.atTime)},',
-                        style: const TextStyle(
-                          fontFamily: 'Jaldi',
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black, // Màu chữ
-                          fontSize: 13, // Kích thước chữ
-                        ),
-                      )),
+                    ),
+                    trailing: Text(
+                      'Hạn chót: ${DateFormat('yyyy-MM-dd | HH:mm:ss').format(todo.atTime)},',
+                      style: const TextStyle(
+                        fontFamily: 'Jaldi',
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black,
+                        fontSize: 13,
+                      ),
+                    ),
+                  ),
                 ),
               );
             },

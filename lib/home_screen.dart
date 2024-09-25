@@ -29,9 +29,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff1d2630),
+      backgroundColor: Color.fromARGB(255, 251, 251, 251),
       appBar: AppBar(
-        backgroundColor: const Color(0xff1d2630),
+        backgroundColor: Colors.pink,
         foregroundColor: Colors.white,
         title: const Text(
           'Daily Planner',
@@ -59,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: <Widget>[
             const DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.indigo,
+                color: Color(0xffADD899),
               ),
               child: Text(
                 'Menu',
@@ -117,7 +117,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 50,
                     width: MediaQuery.of(context).size.width / 2.2,
                     decoration: BoxDecoration(
-                      color: _buttonIndex == 0 ? Colors.indigo : Colors.white,
+                      color: _buttonIndex == 0
+                          ? Colors.indigo
+                          : const Color.fromARGB(255, 232, 137, 137),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Center(
@@ -146,7 +148,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 50,
                     width: MediaQuery.of(context).size.width / 2.2,
                     decoration: BoxDecoration(
-                      color: _buttonIndex == 1 ? Colors.indigo : Colors.white,
+                      color: _buttonIndex == 1
+                          ? Colors.indigo
+                          : const Color.fromARGB(255, 232, 137, 137),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Center(
@@ -160,6 +164,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                 : Colors.black38),
                       ),
                     ),
+                  ),
+                ),
+              ],
+            ),
+            const Row(
+              children: [
+                Expanded(
+                  child: Divider(
+                    color: Colors.black,
+                    thickness: 1,
+                    endIndent: 10,
                   ),
                 ),
               ],

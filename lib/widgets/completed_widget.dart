@@ -17,11 +17,21 @@ class _CompletedWidgetState extends State<CompletedWidget> {
   User? user = FirebaseAuth.instance.currentUser;
   late String uid;
   final DatabaseServices _databaseService = DatabaseServices();
+
   @override
   void initState() {
     super.initState();
     uid = FirebaseAuth.instance.currentUser!.uid;
   }
+
+  // Danh sách màu cố định
+  final List<Color> _colors = [
+    Color(0xffC4D7FF), // Màu xanh
+    Color(0xffEE66A6), // Màu vàng
+    Color(0xffC1CFA1), // Màu đỏ
+    Color(0xff86D293), // Màu xanh lá
+    Color(0xffD2FF72), // Màu cam
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -37,16 +47,24 @@ class _CompletedWidgetState extends State<CompletedWidget> {
             itemBuilder: (context, index) {
               Todo todo = todos[index];
 
+              // Chọn màu dựa trên chỉ mục của item
+              Color tileColor = _colors[
+                  index % _colors.length]; // Áp dụng màu tuần tự theo chỉ mục
+
               return Container(
                 margin: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: tileColor, // Áp dụng màu cho mỗi ô
                   borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
+                    color: Colors.grey.shade300,
+                    width: 3.0,
+                  ),
                 ),
                 child: Slidable(
                   key: ValueKey(todo.id),
                   endActionPane: ActionPane(
-                    motion: DrawerMotion(),
+                    motion: const DrawerMotion(),
                     children: [
                       SlidableAction(
                         backgroundColor: Colors.red,
@@ -60,32 +78,35 @@ class _CompletedWidgetState extends State<CompletedWidget> {
                     ],
                   ),
                   child: ListTile(
-                      title: Text(
-                        todo.title,
-                        style: const TextStyle(
-                          fontFamily: 'Jaldi',
-                          fontSize: 17,
-                          fontWeight: FontWeight.w500,
-                          decoration: TextDecoration.lineThrough,
-                        ),
+                    title: Text(
+                      todo.title,
+                      style: const TextStyle(
+                        fontFamily: 'Jaldi',
+                        fontSize: 17,
+                        fontWeight: FontWeight.w500,
+                        decoration: TextDecoration
+                            .lineThrough, // Gạch ngang cho nhiệm vụ hoàn thành
                       ),
-                      subtitle: Text(
-                        todo.description,
-                        style: const TextStyle(
-                          fontFamily: 'Jaldi',
-                          fontWeight: FontWeight.w500,
-                          decoration: TextDecoration.lineThrough,
-                        ),
+                    ),
+                    subtitle: Text(
+                      todo.description,
+                      style: const TextStyle(
+                        fontFamily: 'Jaldi',
+                        fontWeight: FontWeight.w500,
+                        decoration: TextDecoration
+                            .lineThrough, // Gạch ngang cho nhiệm vụ hoàn thành
                       ),
-                      trailing: Text(
-                        'Hạn chót: ${DateFormat('yyyy-MM-dd | HH:mm:ss').format(todo.atTime)},',
-                        style: const TextStyle(
-                          fontFamily: 'Jaldi',
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black, // Màu chữ
-                          fontSize: 13, // Kích thước chữ
-                        ),
-                      )),
+                    ),
+                    trailing: Text(
+                      'Hạn chót: ${DateFormat('yyyy-MM-dd | HH:mm:ss').format(todo.atTime)},',
+                      style: const TextStyle(
+                        fontFamily: 'Jaldi',
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black, // Màu chữ
+                        fontSize: 13, // Kích thước chữ
+                      ),
+                    ),
+                  ),
                 ),
               );
             },

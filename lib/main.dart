@@ -8,6 +8,7 @@ import 'package:test_appdp/signup_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
   runApp(MyApp());
 }
 
@@ -29,4 +30,3 @@ class MyApp extends StatelessWidget {
             : const LoginScreen());
   }
 }
-
