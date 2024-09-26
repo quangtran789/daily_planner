@@ -155,35 +155,35 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ],
                           ),
-                          // Center(
-                          //   child: ElevatedButton.icon(
-                          //     onPressed: () async {
-                          //       final provider = OAuthProvider("microsoft.com");
-                          //       provider.setCustomParameters(
-                          //         {
-                          //           "tenant": "98ada680-e3f4-48cb-8fbb-c8b10cb97aed"
-                          //         },
-                          //       );
+                          Center(
+                            child: ElevatedButton.icon(
+                              onPressed: () async {
+                                final provider = OAuthProvider("microsoft.com");
+                                provider.setCustomParameters(
+                                  {
+                                    "tenant": "98ada680-e3f4-48cb-8fbb-c8b10cb97aed"
+                                  },
+                                );
 
-                          //       try {
-                          //         if (kIsWeb) {
-                          //           await FirebaseAuth.instance
-                          //               .signInWithPopup(provider);
-                          //         } else {
-                          //           await FirebaseAuth.instance
-                          //               .signInWithRedirect(provider);
-                          //         }
-                          //       } catch (e) {
-                          //         // Show error message
-                          //         ScaffoldMessenger.of(context).showSnackBar(
-                          //           SnackBar(
-                          //               content: Text("Đăng nhập thất bại: $e")),
-                          //         );
-                          //       }
-                          //     },
-                          //     label: const Text("Đăng nhập bằng Microsoft"),
-                          //   ),
-                          // ),
+                                try {
+                                  if (kIsWeb) {
+                                    await FirebaseAuth.instance
+                                        .signInWithPopup(provider);
+                                  } else {
+                                    await FirebaseAuth.instance
+                                        .signInWithRedirect(provider);
+                                  }
+                                } catch (e) {
+                                  // Show error message
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                        content: Text("Đăng nhập thất bại: $e")),
+                                  );
+                                }
+                              },
+                              label: const Text("Đăng nhập bằng Microsoft"),
+                            ),
+                          ),
                         ],
                       ),
                     ),

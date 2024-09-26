@@ -42,7 +42,7 @@ class DatabaseServices {
     return await todoCollection.doc(id).update({'completed': completed});
   }
 
-  //deleta todo task
+  //delete todo task
   Future<void> deleteTodoTask(String id) async {
     return await todoCollection.doc(id).delete();
   }
@@ -84,4 +84,24 @@ class DatabaseServices {
       );
     }).toList();
   }
+
+
+
+
+  // ===================
+  Stream<List<Todo>> get ongoingTodos {
+  return todoCollection
+      .where('uid', isEqualTo: user!.uid)
+      .where('completed', isEqualTo: false) // Thay đổi điều kiện nếu cần
+      .snapshots()
+      .map(_todoListFromSnapshot);
+}
+
+Stream<List<Todo>> get createdTodos {
+  return todoCollection
+      .where('uid', isEqualTo: user!.uid)
+      .snapshots()
+      .map(_todoListFromSnapshot);
+}
+
 }

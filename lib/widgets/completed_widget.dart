@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
@@ -26,11 +25,11 @@ class _CompletedWidgetState extends State<CompletedWidget> {
 
   // Danh sách màu cố định
   final List<Color> _colors = [
-    Color(0xffC4D7FF), // Màu xanh
-    Color(0xffEE66A6), // Màu vàng
-    Color(0xffC1CFA1), // Màu đỏ
-    Color(0xff86D293), // Màu xanh lá
-    Color(0xffD2FF72), // Màu cam
+    const Color(0xffC4D7FF), // Màu xanh
+    const Color(0xffEE66A6), // Màu vàng
+    const Color(0xffC1CFA1), // Màu đỏ
+    const Color(0xff86D293), // Màu xanh lá
+    const Color(0xffD2FF72), // Màu cam
   ];
 
   @override
@@ -78,14 +77,31 @@ class _CompletedWidgetState extends State<CompletedWidget> {
                     ],
                   ),
                   child: ListTile(
-                    title: Text(
-                      todo.title,
-                      style: const TextStyle(
-                        fontFamily: 'Jaldi',
-                        fontSize: 17,
-                        fontWeight: FontWeight.w500,
-                        decoration: TextDecoration
-                            .lineThrough, // Gạch ngang cho nhiệm vụ hoàn thành
+                    title: RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: 'Đã hoàn thành \n',
+                            style: const TextStyle(
+                              fontFamily: 'Jaldi',
+                              fontSize: 17,
+                              fontWeight: FontWeight.w500,
+                              color: Colors
+                                  .red, // Đặt màu đỏ cho phần "Đã hoàn thành"
+                            ),
+                          ),
+                          TextSpan(
+                            text: todo.title,
+                            style: const TextStyle(
+                              fontFamily: 'Jaldi',
+                              fontSize: 17,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w500,
+                              decoration: TextDecoration
+                                  .lineThrough, // Gạch ngang cho nhiệm vụ hoàn thành
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     subtitle: Text(
@@ -93,8 +109,7 @@ class _CompletedWidgetState extends State<CompletedWidget> {
                       style: const TextStyle(
                         fontFamily: 'Jaldi',
                         fontWeight: FontWeight.w500,
-                        decoration: TextDecoration
-                            .lineThrough, // Gạch ngang cho nhiệm vụ hoàn thành
+                        // Gạch ngang cho nhiệm vụ hoàn thành
                       ),
                     ),
                     trailing: Text(

@@ -9,6 +9,7 @@ import 'package:test_appdp/services/auth_service.dart';
 import 'package:test_appdp/services/database_services.dart';
 import 'package:test_appdp/widgets/completed_widget.dart';
 import 'package:test_appdp/widgets/pending_widget.dart';
+import 'package:test_appdp/widgets/task_statistics.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -29,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 251, 251, 251),
+      backgroundColor: const Color.fromARGB(255, 251, 251, 251),
       appBar: AppBar(
         backgroundColor: const Color(0xfff2a9b6),
         foregroundColor: Colors.white,
@@ -59,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: <Widget>[
             const DrawerHeader(
               decoration: BoxDecoration(
-                color: Color(0xffADD899),
+                color:  Color(0xfff2a9b6),
               ),
               child: Text(
                 'Menu',
@@ -71,7 +72,8 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             ListTile(
               leading: const Icon(Icons.home, color: Colors.white),
-              title: const Text('Home', style: TextStyle(color: Colors.white)),
+              title: const Text('Công việc',
+                  style: TextStyle(color: Colors.white)),
               onTap: () {
                 Navigator.pop(context); // Close the drawer
                 // Handle navigation to Home if needed
@@ -79,14 +81,26 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             ListTile(
               leading: const Icon(Icons.calendar_today, color: Colors.white),
-              title:
-                  const Text('Calendar', style: TextStyle(color: Colors.white)),
+              title: const Text('Lịch', style: TextStyle(color: Colors.white)),
               onTap: () {
                 Navigator.pop(context); // Close the drawer
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => const CalenderScreen()),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.settings, color: Colors.white),
+              title:
+                  const Text('Cài đặt', style: TextStyle(color: Colors.white)),
+              onTap: () {
+                Navigator.pop(context); // Close the drawer
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const TaskStatisticsScreen()),
                 );
               },
             ),

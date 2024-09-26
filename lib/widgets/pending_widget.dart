@@ -27,10 +27,10 @@ class _PendingWidgetState extends State<PendingWidget> {
 
   // Danh sách màu cố định
   final List<Color> _colors = [
-    Color(0xffC96868), // Màu xanh
-    Color(0xff48CFCB), // Màu vàng
-    Color(0xff78B7D0), // Màu đỏ
-    Color(0xffA5B68D), // Màu xanh lá
+    const Color(0xffC96868), // Màu xanh
+    const Color(0xff48CFCB), // Màu vàng
+    const Color(0xff78B7D0), // Màu đỏ
+    const Color(0xffA5B68D), // Màu xanh lá
     Colors.orange, // Màu cam
   ];
 
