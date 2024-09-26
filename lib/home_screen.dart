@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 251, 251, 251),
       appBar: AppBar(
-        backgroundColor: Colors.pink,
+        backgroundColor: const Color(0xfff2a9b6),
         foregroundColor: Colors.white,
         title: const Text(
           'Daily Planner',
